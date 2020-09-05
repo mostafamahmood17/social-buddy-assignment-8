@@ -10,8 +10,9 @@ import NoMatch from './Components/NoMatch/NoMatch';
 import PostDetail from './Components/PostDetail/PostDetail';
 
 function App() {
+  
   return (
-    <div>
+    
       <Router>
         <Switch>
         <Route path="/posts/:id">
@@ -30,7 +31,7 @@ function App() {
       </Router>
 
      
-    </div>
+      
   );
 }
 

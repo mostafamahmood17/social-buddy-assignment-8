@@ -1,7 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from '../Comment/Comment';
-import fake from '../../fake';
+import Nav from '../Nav/Nav';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+    root: {
+        minWidth: 275,
+        textAlign: 'center',
+        borderBottom: "1px solid #3f51b5"
+
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+        marginTop: 12,
+    },
+    button:{
+      display: 'flex',
+      justifyContent : 'center'
+
+    } 
+});
 
 
 const PostDetail = () => {
@@ -11,6 +41,7 @@ const PostDetail = () => {
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
         .then(res => res.json())
         .then(data => setDetail(data))
+        .catch(error => console.log(error))
     }, [id])
     const [comment , setComment] = useState([]);
    
@@ -18,25 +49,32 @@ const PostDetail = () => {
         fetch(` https://jsonplaceholder.typicode.com/comments?postId=${id}`)
         .then(res => res.json())
         .then(info => setComment(info))
+        .catch(error => console.log(error))  
     }, [id])
 
    
 
-    const comStyle ={
-        border: '1px solid blue',
-        margin: " 5px",
-        padding:" 10px",
-        textAlign: "center"
+    const classes = useStyles();
+    const strongStyle={
+      color : "#3f51b5"
     }
+    
     
     return (
         <div>
-            <div style={comStyle}>
-            <h1>id = {id}</h1>
-            <h2>title = {detail.title}</h2>
-             <h3>body = {detail.body}</h3>
-             </div>
-             
+            <Nav></Nav>
+            
+            <Card className={classes.root}>
+                <CardContent>
+                    <Typography className={classes.title} color="textPrimary" gutterBottom>
+                    <strong style={strongStyle}>Post {detail.id} =</strong> {detail.title}
+                    </Typography>
+                    <Typography className={classes.pos} color="textPrimary">
+                    <strong style={strongStyle}>Description =</strong> {detail.body}
+                     </Typography>
+                </CardContent>
+            </Card>
+
              {
               comment.map(comments => <Comment key = {comments.id} comment = {comments}></Comment>)
              }
@@ -48,3 +86,9 @@ const PostDetail = () => {
 };
 
 export default PostDetail;
+
+{/* <div>
+            <h1>id = {id}</h1>
+            <h2>title = {detail.title}</h2>
+             <h3>body = {detail.body}</h3>
+             </div> */}

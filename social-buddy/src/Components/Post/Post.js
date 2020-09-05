@@ -7,47 +7,67 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles({
+  const useStyles = makeStyles({
     root: {
-      minWidth: 275,
+        minWidth: 275,
+        textAlign: 'center',
+        borderBottom: "1px solid #3f51b5"
+
     },
     bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
     },
     title: {
-      fontSize: 14,
+        fontSize: 14,
     },
     pos: {
-      marginBottom: 12,
+        marginBottom: 12,
+        marginTop: 12,
     },
-  });
+    button:{
+      display: 'flex',
+      justifyContent : 'center'
+
+    }
+    
+    
+});
   
 
 const Post = (props) => {
     const {id , title, body} = props.post;
-   
-        const classes = useStyles();
-        const bull = <span className={classes.bullet}>•</span>;
-        const text ={
-            textAlign: 'center'
-        }
-   
+    const classes = useStyles();
+    const strongStyle={
+      color : "#3f51b5"
+    }
+    
+        
     return (
-        <div style={text}>
-            <h1>id = {id}</h1>
-            <h2>title = {title}</h2>
-             <h3>body = {body}</h3>
-             <Link to={`/posts/${id}`}><Button variant="contained" color="primary">
-             See Details of id {id}
-             </Button>
-             </Link>
-             
-            
-        </div>
-    );
+      
+            <Card className={classes.root}>
+                <CardContent>
+                    <Typography className={classes.title} color="textPrimary" gutterBottom>
+                    <strong style={strongStyle}>Post {id} = </strong> {title}
+                    </Typography>
+                    <Typography className={classes.pos} color="textPrimary">
+                    <strong style={strongStyle}>Description =</strong> {body}
+                     </Typography>
+                </CardContent>
+                <CardActions className={classes.button}>
+                    <Link to={`/posts/${id}`} style={{textDecoration:'none'}}><Button variant="contained" color="primary" size="small">Detail Here for post {id}</Button></Link>
+                </CardActions>
+            </Card>
+
+     
+
+       
+    )
 }
 
 export default Post;
+
+
+
 

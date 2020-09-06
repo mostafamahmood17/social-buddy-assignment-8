@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,40 +20,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Comment = (props) => {
-  const { name, email, body, id, postId } = props.comment;
+  const { name, email, body, id } = props.comment;
   const classes = useStyles();
 
-
-  // const fake = {1:"https://randomuser.me/api/portraits/men/86.jpg",
-  //               2:"https://randomuser.me/api/portraits/men/73.jpg",
-  //               3:"https://randomuser.me/api/portraits/men/78.jpg",
-  //               4:"https://randomuser.me/api/portraits/women/93.jpg",
-  //               5:"https://randomuser.me/api/portraits/women/45.jpg",
-  //               6:"https://randomuser.me/api/portraits/men/45.jpg",
-  //               7:"https://randomuser.me/api/portraits/men/56.jpg",
-  //               8:"https://randomuser.me/api/portraits/men/79.jpg",
-  //               9:"https://randomuser.me/api/portraits/women/77.jpg",
-  //               }
+function digit(id) {
+  let num = parseInt((id /10));
+  return num
+}
+// console.log((digit(54)))
   
-
-// const twoDigit = (id) => {
-//   let num = [];
-//   if(id > 9) { num.push(id % 10);
-//               id = parseInt(id / 10)}
-//   else{id};
-//   return num[0];
-// }
-  
-
+  // used matarial ui list template
   return (
     <>
       <h1 style={{ textAlign: "center", color : "#3f51b5" }}>Comment</h1>
       <List className={classes.root}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar src={`https://randomuser.me/api/portraits/women/${postId}.jpg`}/>
+            <Avatar src={`https://randomuser.me/api/portraits/men/${digit(id)}.jpg`}/>
           </ListItemAvatar>
-          <ListItemText
+           <ListItemText
             primary={name}
             secondary={
               <React.Fragment>
@@ -61,21 +46,22 @@ const Comment = (props) => {
                   component="span"
                   variant="body2"
                   className={classes.inline}
-                  color="textPrimary"
-                >
-                  {email}
+                  color="textPrimary">
+                  Email : {email}
                 </Typography>
                 <br />
-                {body}
+                <strong>Comment :</strong> {body}
               </React.Fragment>
             }
           />
-        </ListItem>
+         </ListItem>
         <Divider variant="inset" component="li"/>
-
       </List>
     </>
   );
 };
 
 export default Comment;
+
+
+

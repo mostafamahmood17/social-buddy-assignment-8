@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     } 
 });
 
-
+// post api to get each posts
 const PostDetail = () => {
     const [detail , setDetail] = useState({});
     const {id} = useParams();
@@ -43,8 +43,9 @@ const PostDetail = () => {
         .then(data => setDetail(data))
         .catch(error => console.log(error))
     }, [id])
+    
+    // comment api to use comments
     const [comment , setComment] = useState([]);
-   
     useEffect(() => {
         fetch(` https://jsonplaceholder.typicode.com/comments?postId=${id}`)
         .then(res => res.json())
@@ -59,11 +60,10 @@ const PostDetail = () => {
       color : "#3f51b5"
     }
     
-    
+    // used matarial ui card
     return (
         <div>
             <Nav></Nav>
-            
             <Card className={classes.root}>
                 <CardContent>
                     <Typography className={classes.title} color="textPrimary" gutterBottom>
@@ -77,18 +77,10 @@ const PostDetail = () => {
 
              {
               comment.map(comments => <Comment key = {comments.id} comment = {comments}></Comment>)
-             }
-             
-               
-             
+             }          
         </div>
     );
 };
 
 export default PostDetail;
 
-{/* <div>
-            <h1>id = {id}</h1>
-            <h2>title = {detail.title}</h2>
-             <h3>body = {detail.body}</h3>
-             </div> */}

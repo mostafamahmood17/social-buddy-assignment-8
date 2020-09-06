@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
   const useStyles = makeStyles({
     root: {
         minWidth: 275,
-        textAlign: 'center',
+        textAlign: 'left',
         borderBottom: "1px solid #3f51b5"
 
     },
@@ -43,7 +43,7 @@ const Post = (props) => {
       color : "#3f51b5"
     }
     
-        
+        // used matarial ui card
     return (
       
             <Card className={classes.root}>

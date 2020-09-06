@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const linkStyle = {
+    textDecoration:'none', color:"whitesmoke", cursor:"pointer"
+}
+
+
+// matarial ui appbar and home link used
 const Nav = () => {
     const classes = useStyles();
     return (
@@ -23,8 +30,10 @@ const Nav = () => {
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography variant="h6" className={classes.title}>
-                            Social Buddy
+                        <Typography variant="h6" gutterBottom className={classes.title}>
+                            <div align="center">
+                            <Link style={linkStyle} to="/">Social Buddy</Link>
+                            </div>
                         </Typography>
                     </Toolbar>
                 </AppBar>
